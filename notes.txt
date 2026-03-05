@@ -1,8 +1,8 @@
 To Compile:  g++ main.cpp -o sfml_example -I/usr/local/include -L/usr/local/lib -lsfml-graphics -lsfml-window -lsfml-system
 To Run:     ./sfml_example
 
-//You will write important things to remember or things to do in the next version here
-//You can always include known errors so you dont get surprised when going back to an old version
+//Write important things to remember or things to do in the next version here
+//Can always include known errors so you dont get surprised when going back to an old version
 
 
 Created more of the background class and worked on movement in both the x and y plane.
@@ -25,7 +25,7 @@ void saveGame(int score, int level) {
     }
 }
 
-Objects shouldn't be used, use layers because youre not printing something once with a screen updating that fast.
+Objects rectangle func. shouldn't be used, use layers because youre not printing something once with a screen updating that fast.
 Ground at y=550
 
 After a certain point it'll be bigger than the arrays size, have to find a way to make it go from end to beginning.
