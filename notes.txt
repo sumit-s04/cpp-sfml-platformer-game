@@ -1,0 +1,118 @@
+To Compile:  g++ main.cpp -o sfml_example -I/usr/local/include -L/usr/local/lib -lsfml-graphics -lsfml-window -lsfml-system
+To Run:     ./sfml_example
+
+//You will write important things to remember or things to do in the next version here
+//You can always include known errors so you dont get surprised when going back to an old version
+
+
+Created more of the background class and worked on movement in both the x and y plane.
+Also fixed problems with the screen displaying incorrect pixels
+due to a switch in the x and y numbers of the sky array.
+Need to work on displaying other items in the sky and adding more colors.
+
+
+
+
+
+
+
+void saveGame(int score, int level) {
+    std::ofstream outFile("savegame.txt");
+    if (outFile.is_open()) {
+        outFile << score << "\n";
+        outFile << level << "\n";
+        outFile.close();
+    }
+}
+
+Objects shouldn't be used, use layers because youre not printing something once with a screen updating that fast.
+Ground at y=550
+
+After a certain point it'll be bigger than the arrays size, have to find a way to make it go from end to beginning.
+
+/*
+void BlockChange(){ //redo this in collisions func
+    for(int i=0; i<Blocks.size(); i++){
+        if((slidX>Blocks[i].x1-800 && slidX<Blocks[i].x2-800 || slidX+50>Blocks[i].x1-800 && slidX+50<Blocks[i].x2-800) && position_y>=Blocks[i].y1 && position_y<=Blocks[i].y2){
+            for(int y=Blocks[i].y1; y<Blocks[i].y2; y++){ //block part
+                for(int x=Blocks[i].x1; x<Blocks[i].x2; x++){
+                    Dirt[y][x]=sf::Color(186, 117, 34).toInteger(); 
+                }
+            }      
+        }
+
+ //       else if (slidX>=Blocks[i].x2-865 && slidX<=Blocks[i].x2-810 && position_y>=Blocks[i].y1 && position_y<=Blocks[i].y2){
+ //           slidX=Blocks[i].x2-810;
+ //           Character(position_x,position_y);            
+ //       }
+
+        else if(slidX==Blocks[i].x1-800 && slidX+50==Blocks[i].x2-800 && position_y>=Blocks[i].y1 && position_y<=Blocks[i].y2){
+            for(int y=Blocks[i].y1; y<Blocks[i].y2; y++){ //block part
+                for(int x=Blocks[i].x1; x<Blocks[i].x2; x++){
+                    Dirt[y][x]=sf::Color(186, 117, 34).toInteger(); 
+                }
+            }      
+        }
+    }
+}
+*/
+
+Im thinking about making a while loop where I can implement gravity until the conditions of "IsonLand" are met.
+I will include on block & pipe functions to make this statement true, and implement holes where this statement will be false. 
+Whenever mario is not on land gravity will take place, until this condition is met, allowing me to also remove the other for loop 
+in the jump functions.
+
+I was having problems with collisions, and finally found out it was due to the if statements not being given a range of pixels. I would put things like if(pos_y == 500) which wouldn't always be detected.
+ This was changed to something like if (position_y<=506 && position_y>=494).
+
+I might remove ObjCollision, I don't think it will work as I originally thought, and the OnGround bool works fine for both obj and dirt.
+
+BLOCK COLLISIONS FINALIZED??
+
+
+uint8_t GameCurrentState = 0; 
+
+while(app open){
+
+    if(GameCurrentState == 0){
+        //intro screen
+        if(user action correct){ 
+            GameCurrentState++; 
+        }
+    }
+
+    if(GameCurrentState == 1){
+        //phys game
+        if(game_flag stopped){
+            if(if mario dead){ 
+                GameCurrentState=2; 
+            }else{
+                GameCurrentState=3; 
+            }
+        }
+    }
+
+    if(GameCurrentState == 2){
+        //game over screen
+        if(user action restart){ 
+            restart level
+            GameCurrentState=1; 
+        }
+
+        if(user close) { close program }
+    }
+
+    if(GameCurrentState == 3){
+        //next level screen
+        if(user action next){ 
+            switch level
+            GameCurrentState=1; 
+        }
+    }
+
+}
+
+if !window statement that will make new window for next lvl after lvl 1 break?
+
+    int position_x=400; //layer 2
+    int position_y=500; int y2=position_y+50;
